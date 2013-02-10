@@ -40,3 +40,10 @@
                           (fd/in n (fd/interval 1 stop))
                           (fizzbuzzo n r)
                           (== q [n r]))))))
+
+(defn find-fizzbuzz-index-for
+  [v max]
+
+  (run* [q]
+        (fizzbuzzo q v)
+        (fd/in q (fd/interval 1 max))))

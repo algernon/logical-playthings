@@ -33,7 +33,10 @@
 (defn fizzbuzz-seq
   [stop]
 
-  (->> (range)
-       (drop 1)
-       (map fizzbuzz)
-       (take stop)))
+  (map second
+       (sort (fn [[a _] [b _]] (compare a b))
+             (run* [q]
+                   (fresh [n r]
+                          (fd/in n (fd/interval 1 stop))
+                          (fizzbuzzo n r)
+                          (== q [n r]))))))

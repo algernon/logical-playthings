@@ -31,16 +31,20 @@
   (first (run* [q]
                (fizzbuzzo n q))))
 
+(defn fizzbuzz-seq*
+  [stop]
+
+  (run* [q]
+        (fresh [n r]
+               (fd/in n (fd/interval 1 stop))
+               (fizzbuzzo n r)
+               (== q [n r]))))
+
 (defn fizzbuzz-seq
   [stop]
 
-  (map second
-       (sort (fn [[a _] [b _]] (compare a b))
-             (run* [q]
-                   (fresh [n r]
-                          (fd/in n (fd/interval 1 stop))
-                          (fizzbuzzo n r)
-                          (== q [n r]))))))
+  (map #(get (apply hash-map (mapcat concat (fizzbuzz-seq* stop))) %)
+       (range 1 (inc stop))))
 
 (defn find-fizzbuzz-index-for
   [v max]

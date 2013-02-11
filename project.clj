@@ -4,4 +4,4 @@
   :license {:name "GNU Lesser General Public License v3+"
             :url "http://www.gnu.org/licenses/lgpl.html"}
   :dependencies [[org.clojure/clojure "1.4.0"]
-                 [org.clojure/core.logic "0.8.3-rc3-SNAPSHOT"]])
+                 [org.clojure/core.logic "0.8.0-rc3-SNAPSHOT"]])

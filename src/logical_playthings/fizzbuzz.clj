@@ -3,14 +3,14 @@
   (:use [clojure.core.logic])
   (:require [clojure.core.logic.fd :as fd]))
 
-(defn multo
+(defn multc
   "Ensure that `n` is a multiplicate of `div`."
   [n div]
 
   (fresh [x]
          (fd/quot n div x)))
 
-(defnc not-multo
+(defnc not-multc
   [n div]
 
   (when (number? n)
@@ -20,10 +20,10 @@
   [?n q]
 
   (conde
-   [(multo ?n 3) (multo ?n 5) (== q :fizzbuzz)]
-   [(multo ?n 3) (not-multo ?n 5) (== q :fizz)]
-   [(multo ?n 5) (not-multo ?n 3) (== q :buzz)]
-   [(not-multo ?n 3) (not-multo ?n 5) (== q ?n)]))
+   [(multc ?n 3) (multc ?n 5) (== q :fizzbuzz)]
+   [(multc ?n 3) (not-multc ?n 5) (== q :fizz)]
+   [(multc ?n 5) (not-multc ?n 3) (== q :buzz)]
+   [(not-multc ?n 3) (not-multc ?n 5) (== q ?n)]))
 
 (defn fizzbuzz
   [n]

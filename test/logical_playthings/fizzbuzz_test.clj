@@ -1,6 +1,7 @@
 (ns logical-playthings.fizzbuzz-test
   (:use [clojure.test]
-        [logical-playthings.fizzbuzz]))
+        [logical-playthings.fizzbuzz])
+  (:require [clojure.core.logic :as logic]))
 
 (deftest test:fizzbuzz
   (testing "The fizzbuzz function"
@@ -24,6 +25,19 @@
     (is (= (fizzbuzz-seq 15)
              [1 2 :fizz 4 :buzz :fizz 7 8 :fizz :buzz
               11 :fizz 13 14 :fizzbuzz]))))
+
+(deftest test:fizzbuzz-seq*
+  (testing "The fizzbuzz-seq* function"
+    (is (= (logic/run* [q]
+                       (fizzbuzz-seq* 1 16 q))
+           (list [1 2 :fizz 4 :buzz :fizz 7 8 :fizz :buzz
+                  11 :fizz 13 14 :fizzbuzz])))
+
+    (is (= (logic/run 1 [q]
+                      (fizzbuzz-seq* 1 q
+                                     [1 2 :fizz 4 :buzz :fizz 7 8 :fizz :buzz
+                                      11 :fizz 13 14 :fizzbuzz]))
+           (list 16)))))
 
 (deftest test:fizzbuzz-backwards
   (testing "Running fizzbuzz backwards"

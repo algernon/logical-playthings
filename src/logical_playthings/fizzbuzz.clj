@@ -38,14 +38,14 @@
    [(== start end) (== list [])]
    [(!= start end) (fresh [s+1 tail r]
                           (fd/+ start 1 s+1)
-                          (fizzbuzzo s+1 r)
+                          (fizzbuzzo start r)
                           (fizzbuzz-seq* s+1 end tail)
                           (conso r tail list))]))
 
 (defn fizzbuzz-seq
   [stop]
 
-  (first (run* [q] (fizzbuzz-seq* 0 stop q))))
+  (first (run* [q] (fizzbuzz-seq* 1 (inc stop) q))))
 
 (defn find-fizzbuzz-index-for
   [v max]

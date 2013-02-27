@@ -3,16 +3,13 @@
   (:use [clojure.core.logic])
   (:require [clojure.core.logic.fd :as fd]))
 
-(defn- neighbourc
-  [neighbour-count]
-
-  (fd/in neighbour-count (fd/interval 0 8)))
-
 (defn cell-step
   [living? neighbour-count result]
 
-  (conde
-   [(neighbourc neighbour-count) (fd/< neighbour-count 2) (== result false)]
-   [(neighbourc neighbour-count) (fd/> neighbour-count 3) (== result false)]
-   [(neighbourc neighbour-count) (== neighbour-count 3) (== result true)]
-   [(neighbourc neighbour-count) (== neighbour-count 2) (== result living?)]))
+  (comp
+   (fd/in neighbour-count (fd/interval 0 8))
+   (conde
+    [(fd/< neighbour-count 2) (== result false)]
+    [(fd/> neighbour-count 3) (== result false)]
+    [(== neighbour-count 3) (== result true)]
+    [(== neighbour-count 2) (== result living?)])))

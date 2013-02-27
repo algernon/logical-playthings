@@ -1,5 +1,7 @@
 # logical-playthings
 
+[![Build Status](https://travis-ci.org/algernon/logical-playthings.png?branch=master)](https://travis-ci.org/algernon/logical-playthings)
+
 The things herein are various, mostly independent snippets, things I
 use to learn [core.logic][clogic].
 

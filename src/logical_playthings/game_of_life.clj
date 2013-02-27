@@ -6,7 +6,7 @@
 (defn cell-step
   [living? neighbour-count result]
 
-  (comp
+  (all
    (fd/in neighbour-count (fd/interval 0 8))
    (conde
     [(fd/< neighbour-count 2) (== result false)]

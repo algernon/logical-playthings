@@ -113,3 +113,15 @@
                         (cell-step true neighbour-count result)))
            #{[3 true] [2 true] [8 false] [7 false] [6 false]
              [5 false] [4 false] [1 false] [0 false]}))))
+
+(deftest test:neighbouro
+  (testing "How to find neighbours"
+    (is (= (set
+            (logic/run* [neighbour]
+                        (neighbouro [0 0] neighbour)))
+           #{[1 -1] [1 0] [-1 -1] [0 -1] [-1 0] [1 1] [-1 1] [0 1]}))
+
+    (is (= (set
+            (logic/run* [cell]
+                        (neighbouro cell [1 1])))
+           #{[2 1] [1 0] [2 2] [0 0] [0 1] [1 2] [0 2] [2 0]}))))

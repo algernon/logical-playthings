@@ -17,24 +17,17 @@
 (defn neighbouro
   [cell neighbour]
 
-  (fresh [cell-x cell-y
-          nb-x nb-y]
-         (== cell [cell-x cell-y])
-         (== neighbour [nb-x nb-y])
+  (let [nb-table (for [x (range -1 2)
+                       y (range -1 2)
+                       :when (not (= [x y] [0 0]))] [x y])]
+    (fresh [cell-x cell-y
+            nb-x nb-y
+            dx dy]
+           (== cell [cell-x cell-y])
+           (== neighbour [nb-x nb-y])
 
-         (!= cell neighbour)
+           (!= cell neighbour)
 
-         ;; FIXME: This conde here is terrible, and should be replaced
-         ;; by something much more logical.
-         (conde
-          [(fd/- cell-x 1 nb-x) (fd/- cell-y 1 nb-y)]
-          [(== cell-x nb-x) (fd/- cell-y 1 nb-y)]
-          [(fd/+ cell-x 1 nb-x) (fd/- cell-y 1 nb-y)]
-
-          [(fd/- cell-x 1 nb-x) (== cell-y nb-y)]
-          ; ---
-          [(fd/+ cell-x 1 nb-x) (== cell-y nb-y)]
-
-          [(fd/- cell-x 1 nb-x) (fd/+ cell-y 1 nb-y)]
-          [(== cell-x nb-x) (fd/+ cell-y 1 nb-y)]
-          [(fd/+ cell-x 1 nb-x) (fd/+ cell-y 1 nb-y)])))
+           (fd/- cell-x nb-x dx)
+           (fd/- cell-y nb-y dy)
+           (membero [dx dy] nb-table))))

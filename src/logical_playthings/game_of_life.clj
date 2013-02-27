@@ -31,3 +31,19 @@
            (fd/- cell-x nb-x dx)
            (fd/- cell-y nb-y dy)
            (membero [dx dy] nb-table))))
+
+(defn living-neighbouro
+  [form cell neighbour]
+
+  (all
+   (neighbouro cell neighbour)
+   (membero cell form)
+   (membero neighbour form)))
+
+(defnu lengtho [l n]
+  ([[] 0])
+  ([[_ . tail] _]
+     (fresh [n1]
+            (lengtho tail n1)
+            (project [n n1]
+                     (== n (+ n1 1))))))

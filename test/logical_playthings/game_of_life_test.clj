@@ -82,14 +82,34 @@
                               (cell-step false q false)))
              #{0 1 2 4 5 6 7 8})))))
 
-(deftest test:cell-step-backwards
-  (testing "Single cell rules running backwards"
-    (testing "Former state of a living cell"
-      ;; Q: If I have a living cell, what states is it possible to arrive to this state?
-      ;; A: If it has 3 neighbours, any state results in a living
-      ;;    cell, or if the cell was alive, and had two neighbours, it
-      ;;    will remain living.
-      (is (= (set
-              (logic/run* [living? neighbour-count]
-                          (cell-step living? neighbour-count true)))
-             #{['_0 3] [true 2]})))))
+(deftest test:cell-step-combined
+  (testing "Single cell rules, complex questions"
+    ;; Q: If I have a living cell, what states is it possible to arrive to this state?
+    ;; A: If it has 3 neighbours, any state results in a living
+    ;;    cell, or if the cell was alive, and had two neighbours, it
+    ;;    will remain living.
+    (is (= (set
+            (logic/run* [living? neighbour-count]
+                        (cell-step living? neighbour-count true)))
+           #{['_0 3] [true 2]}))
+
+    ;; Q: If I have a dead cell, what states is it possible to arrive to this tage?
+    (is (= (set
+            (logic/run* [living? neighbour-count]
+                        (cell-step living? neighbour-count false)))
+           #{['_0 0] [false 2] ['_0 1] ['_0 4] ['_0 5] ['_0 6] ['_0 7] ['_0 8]}))
+
+    ;; Q: Show me all the possible states a cell can get!
+    (is (= (set
+            (logic/run* [living? neighbour-count result]
+                        (cell-step living? neighbour-count false)))
+           #{['_0 8 '_1] ['_0 7 '_1] ['_0 6 '_1] ['_0 5 '_1]
+             ['_0 4 '_1] [false 2 '_0] ['_0 1 '_1] ['_0 0 '_1]}))
+
+    ;; Q: If I have a living cell, what will it evolve to at various
+    ;; neighbour counts?
+    (is (= (set
+            (logic/run* [neighbour-count result]
+                        (cell-step true neighbour-count result)))
+           #{[3 true] [2 true] [8 false] [7 false] [6 false]
+             [5 false] [4 false] [1 false] [0 false]}))))

@@ -1,6 +1,6 @@
 (ns logical-playthings.fizzbuzz
   (:refer-clojure :exclude [==])
-  (:use [clojure.core.logic])
+  (:use [clojure.core.logic :only [fresh defnc conde == != conso run*]])
   (:require [clojure.core.logic.fd :as fd]))
 
 (defn multc

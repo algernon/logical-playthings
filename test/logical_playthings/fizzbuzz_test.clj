@@ -1,6 +1,6 @@
 (ns logical-playthings.fizzbuzz-test
-  (:use [clojure.test]
-        [logical-playthings.fizzbuzz])
+  (:use [clojure.test :only [deftest testing is]]
+        [logical-playthings.fizzbuzz :only [fizzbuzz fizzbuzz-seq fizzbuzz-seq* find-fizzbuzz-index-for]])
   (:require [clojure.core.logic :as logic]))
 
 (deftest test:fizzbuzz

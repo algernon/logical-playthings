@@ -9,9 +9,9 @@
   (all
    (fd/in neighbour-count (fd/interval 0 8))
    (conde
-    [(fd/< neighbour-count 2) (== result false)]
-    [(fd/> neighbour-count 3) (== result false)]
-    [(== neighbour-count 3) (== result true)]
+    [(fd/< neighbour-count 2) (== result :dead)]
+    [(fd/> neighbour-count 3) (== result :dead)]
+    [(== neighbour-count 3) (== result :alive)]
     [(== neighbour-count 2) (== result living?)])))
 
 (defn neighbouro

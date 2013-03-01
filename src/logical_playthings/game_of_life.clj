@@ -1,6 +1,6 @@
 (ns logical-playthings.game-of-life
   (:refer-clojure :exclude [==])
-  (:use [clojure.core.logic])
+  (:use [clojure.core.logic :only [== all conde fresh != membero project defnu]])
   (:require [clojure.core.logic.fd :as fd]))
 
 (defn cell-step

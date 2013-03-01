@@ -1,6 +1,6 @@
 (ns logical-playthings.game-of-life-test
-  (:use [clojure.test]
-        [logical-playthings.game-of-life])
+  (:use [clojure.test :only [deftest testing is]]
+        [logical-playthings.game-of-life :only [cell-step neighbouro]])
   (:require [clojure.core.logic :as logic]
             [clojure.core.logic.fd :as fd]))
 

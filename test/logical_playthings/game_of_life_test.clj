@@ -1,6 +1,6 @@
 (ns logical-playthings.game-of-life-test
   (:use [clojure.test :only [deftest testing is]]
-        [logical-playthings.game-of-life :only [cell-step neighbouro]])
+        [logical-playthings.game-of-life :only [cell-step neighbouro living-neighbouro]])
   (:require [clojure.core.logic :as logic]
             [clojure.core.logic.fd :as fd]))
 
@@ -125,3 +125,12 @@
             (logic/run* [cell]
                         (neighbouro cell [1 1])))
            #{[2 1] [1 0] [2 2] [0 0] [0 1] [1 2] [0 2] [2 0]}))))
+
+(deftest test:living-neighbouro
+  (testing "How to find living neighbours"
+    (is (= (set
+            (logic/run* [neighbours]
+                        (living-neighbouro [[0 0] [1 0] [2 0]]
+                                           [1 0]
+                                           neighbours)))
+           #{[0 0] [2 0]}))))

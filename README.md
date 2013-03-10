@@ -28,6 +28,15 @@ tests in [game_of_life_test.clj][gol-test].
  [gol]: https://github.com/algernon/logical-playthings/blob/master/src/logical_playthings/game_of_life.clj
  [gol-test]: https://github.com/algernon/logical-playthings/blob/master/test/logical_playthings/game_of_life_test.clj
 
+### Arithmetic explorations
+
+Various arithmetic functions implemented in core.logic, such as
+`remo`. As usual, sources are in [arithmetic.clj][arith], and tests
+are in [arithmetic_test.clj][arith-test].
+
+ [arith]: https://github.com/algernon/logical-playthings/blob/master/src/logical_playthings/arithmetic.clj
+ [arith-test]: https://github.com/algernon/logical-playthings/blob/master/test/logical_playthings/arithmetic_test.clj
+
 ## License
 
 Copyright © 2013 Gergely Nagy <algernon@madhouse-project.org>

@@ -3,7 +3,10 @@
 ;; at least with LightTable.
 (ns logical-playthings.playground
   (:require [clojure.core.logic :as l]
-            [logical-playthings.game-of-life :as gol]))
+            [clojure.core.logic.fd :as fd]
+            [logical-playthings.game-of-life :as gol]
+            [logical-playthings.fizzbuzz :as fbz]
+            [logical-playthings.arithmetic :as arith]))
 
 ;; I have a cell, that oscillates between living and dying. How many neighbours does it have?
 (println

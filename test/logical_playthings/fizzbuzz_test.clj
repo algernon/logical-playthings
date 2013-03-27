@@ -42,29 +42,32 @@
 (deftest test:fizzbuzz-backwards
   (testing "Running fizzbuzz backwards"
     (testing "and finding numbers that return 1"
-      (is (= (find-fizzbuzz-index-for 1 10)
+      (is (= (find-fizzbuzz-index-for 1 :max 10)
                [1])))
     (testing "and finding numbers that return :fizz"
-      (is (= (find-fizzbuzz-index-for :fizz 30)
+      (is (= (find-fizzbuzz-index-for :fizz :max 30)
                [3 6 9 12 18 21 24 27])))
     (testing "and finding numbers that return :buzz"
-      (is (= (find-fizzbuzz-index-for :buzz 30)
+      (is (= (find-fizzbuzz-index-for :buzz :max 30)
                [5 10 20 25])))
     (testing "and finding numbers that return :fizzbuzz"
-      (is (= (find-fizzbuzz-index-for :fizzbuzz 30)
+      (is (= (find-fizzbuzz-index-for :fizzbuzz :max 30)
                [15 30])))
 
     (testing "without a max-value set"
       (is (= (find-fizzbuzz-index-for 11)
              [11])))
     (testing "with a limit set on returned value"
-      (is (= (find-fizzbuzz-index-for :fizz Integer/MAX_VALUE 5)
-             [3 6 9 12 18]))))
+      (is (= (find-fizzbuzz-index-for :fizz :limit 5)
+             [3 6 9 12 18])))
+    (testing "with a limit and max-value set"
+      (is (= (find-fizzbuzz-index-for :fizz :limit 5 :max 17)
+             [3 6 9 12]))))
 
   (testing "Running fizzbuzz back and forth"
-    (is (= (map fizzbuzz (find-fizzbuzz-index-for :fizz 30))
+    (is (= (map fizzbuzz (find-fizzbuzz-index-for :fizz :max 30))
              (filter #{:fizz} (fizzbuzz-seq 30))))
-    (is (= (map fizzbuzz (find-fizzbuzz-index-for :buzz 30))
+    (is (= (map fizzbuzz (find-fizzbuzz-index-for :buzz :max 30))
              (filter #{:buzz} (fizzbuzz-seq 30))))
-    (is (= (map fizzbuzz (find-fizzbuzz-index-for :fizzbuzz 30))
+    (is (= (map fizzbuzz (find-fizzbuzz-index-for :fizzbuzz :max 30))
              (filter #{:fizzbuzz} (fizzbuzz-seq 30))))))

@@ -48,14 +48,15 @@
   (first (run* [q] (fizzbuzz-seq* 1 (inc stop) q))))
 
 (defn find-fizzbuzz-index-for
-  ([v] (find-fizzbuzz-index-for v Integer/MAX_VALUE))
-  ([v max] (find-fizzbuzz-index-for v max :*))
-  ([v max limit]
+  [v & opts]
 
-     (if (= limit :*)
-       (run* [q]
-             (fizzbuzzo q v)
-             (fd/in q (fd/interval 1 max)))
-       (run limit [q]
+  (let [opts# (apply hash-map opts)
+        limit (:limit opts#)
+        max (get opts# :max Integer/MAX_VALUE)]
+    (if limit
+      (run limit [q]
+           (fizzbuzzo q v)
+           (fd/in q (fd/interval 1 max)))
+      (run* [q]
             (fizzbuzzo q v)
             (fd/in q (fd/interval 1 max))))))

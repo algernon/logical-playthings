@@ -52,7 +52,14 @@
                [5 10 20 25])))
     (testing "and finding numbers that return :fizzbuzz"
       (is (= (find-fizzbuzz-index-for :fizzbuzz 30)
-               [15 30]))))
+               [15 30])))
+
+    (testing "without a max-value set"
+      (is (= (find-fizzbuzz-index-for 11)
+             [11])))
+    (testing "with a limit set on returned value"
+      (is (= (find-fizzbuzz-index-for :fizz Integer/MAX_VALUE 5)
+             [3 6 9 12 18]))))
 
   (testing "Running fizzbuzz back and forth"
     (is (= (map fizzbuzz (find-fizzbuzz-index-for :fizz 30))

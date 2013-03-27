@@ -1,6 +1,6 @@
 (ns logical-playthings.fizzbuzz
   (:refer-clojure :exclude [==])
-  (:use [clojure.core.logic :only [fresh defnc conde == != conso run*]])
+  (:use [clojure.core.logic :only [fresh defnc conde == != conso run* run]])
   (:require [clojure.core.logic.fd :as fd]))
 
 (defn multc
@@ -48,8 +48,14 @@
   (first (run* [q] (fizzbuzz-seq* 1 (inc stop) q))))
 
 (defn find-fizzbuzz-index-for
-  [v max]
+  ([v] (find-fizzbuzz-index-for v Integer/MAX_VALUE))
+  ([v max] (find-fizzbuzz-index-for v max :*))
+  ([v max limit]
 
-  (run* [q]
-        (fizzbuzzo q v)
-        (fd/in q (fd/interval 1 max))))
+     (if (= limit :*)
+       (run* [q]
+             (fizzbuzzo q v)
+             (fd/in q (fd/interval 1 max)))
+       (run limit [q]
+            (fizzbuzzo q v)
+            (fd/in q (fd/interval 1 max))))))

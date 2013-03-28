@@ -70,4 +70,6 @@
     (is (= (map fizzbuzz (find-fizzbuzz-index-for :buzz :max 30))
              (filter #{:buzz} (fizzbuzz-seq 30))))
     (is (= (map fizzbuzz (find-fizzbuzz-index-for :fizzbuzz :max 30))
-             (filter #{:fizzbuzz} (fizzbuzz-seq 30))))))
+             (filter #{:fizzbuzz} (fizzbuzz-seq 30))))
+    (is (= (map fizzbuzz (find-fizzbuzz-index-for 11))
+           '(11)))))
